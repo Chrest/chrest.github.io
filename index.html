@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="row header">
+            <div class="col game">
+                <span class="serie" translate="LAYOUT_SERIE_TITLE">Divinity</span>
+                <span class="title" translate="LAYOUT_GAME_TITLE">Original Sin</span>
+                <span class="edition" translate="LAYOUT_GAME_EDITION">Extended Edition</span>
+                <span class="version">v2.0.119.430</span>
+            </div class="col"><div class="col script">
+                <span class="title" translate="LAYOUT_SCRIPT_TITLE">Character Planner</span>
+            </div><div class="col nav">
+                <div class="row">
+                    <label for="character_toggler" class="col" translate="LAYOUT_CHARACTER_PANEL">Character
+                    </label><label for="skill_toggler" class="col" translate="LAYOUT_SKILL_PANEL">Skill
+                    </label><label for="attribute_toggler" class="col" translate="LAYOUT_ATTRIBUTE_PANEL">Attribute
+                    </label><label for="ability_toggler" class="col" translate="LAYOUT_ABILITY_PANEL">Ability
+                    </label><label for="talent_toggler" class="col" translate="LAYOUT_TALENT_PANEL">Talent
+                    </label><label for="bonus_toggler" class="col" translate="LAYOUT_BONUS_PANEL">Bonus
+                    </label><label for="result_toggler" class="col" translate="LAYOUT_RESULT_PANEL">Result</label>
+                </div>
+            </div>
+        </div>
+        <div class="row warning" id="warning">
+        </div>
+        <div class="row body" id="body">
+            <span class="col" translate="LAYOUT_SCRIPT_LOADING">Script is loading...</span>
+        </div>
+        <div class="row footer">
+            <span class="col" translate="LAYOUT_SCRIPT_AUTHOR">Chrest
+            </span><span class="col" translate="LAYOUT_HONOR_GUIDE">Check out my Honour Mode Speedrun guide</span>
+        </div>
+    </div>
+<script>
+function cors(url, method, type, data, callback, errback) {
+    var req;
+    if(XMLHttpRequest) {
+        req = new XMLHttpRequest();
+        if(req.withCredentials !== undefined) {
+            req.open(method, url, true);
+            req.responseType = type;
+            req.onerror = errback;
+            req.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status >= 200 && this.status < 400) {
+                        callback(this.responseType == '' ? this.responseText : this.response);
+                    } else {
+                    if(errback) errback({message: 'Response returned with non-OK status'});
+                    }
+                }
+            };
+            req.send(/*data*/);
+        }
+    } else {
+        if(errback) errback({message: 'XmlHTTPRequest 2 not fully supported'});
+    }
+};
+function createElement() {
+    switch(arguments.length) {
+        case 1:
+            var A = document.createTextNode(arguments[0]);
+        break;
+        default:
+            var A = document.createElement(arguments[0]),
+                B = arguments[1];
+            for (var b in B) {
+                if (b.indexOf("on") == 0) {
+                    A.addEventListener ? A.addEventListener(b.substring(2), B[b], false) : A.attachEvent(b,B[b]);
+                } else if (",style,accesskey,id,name,src,href,translate,value,".indexOf("," + b.toLowerCase()) != -1) {
+                    A.setAttribute(b, B[b]);
+                } else {
+                    A[b] = B[b];
+                }
+            }
+            for(var i = 2, len = arguments.length; i < len; ++i) {
+                A.appendChild(arguments[i]);
+            }
+        }
+    return A;
+};
+
+var config = window.location.hash.substring(1),
+    lang = 'en',
+    langs = ['en', 'fr'],
+    version = 1,
+    last_version = 1;
+
+if(config) {
+    config = config.split(';');
+    for(var i = config.length -1; i > -1; i--) {
+        if(config[i].length > 0 && config[i][0] == 'v') { //versioning token
+            var check_token = config[i].substring(1).split('-');
+            check_token[0] = parseInt(check_token[0]);
+            if(check_token[0] > 0 && check_token[0] < last_version) {
+                version = check_token[0];
+            }
+            if(check_token.length > 1 && langs.indexOf(check_token[1]) != -1) {
+                lang = check_token[1];
+            }
+        }
+    }
+}
+document.body.appendChild(createElement('script', {src: 'js/' + version + '.js'}));
+</script>
+</body>
+</html>

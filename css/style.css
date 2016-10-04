@@ -1,0 +1,170 @@
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+    background-color: white;
+    height: 100%;
+}
+
+[hidden], .hidden {
+    display: none;
+}
+
+a {
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 2em; margin: 0.67em 0;
+}
+
+img {
+    border: 2px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4px;
+    max-width: 64px;
+}
+.attribute img {max-width: 32px;}
+
+label {
+    display: inline-block;
+}
+
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+.col {
+    padding: 0 1.5em;
+}
+.row .row {
+    margin: 0 -1.5em;
+}
+@media only screen {
+    .col {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    }
+}
+
+.wrapper {
+    box-sizing: border-box;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 5em;
+}
+.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 1em 0;
+}
+
+.toggler:not(:checked) + .toggable {display: none;}
+
+.header {background: darkred; color: gold; text-align: center;}
+.game {padding: 0.5em; text-align: center; position: relative; float: left; width: auto; text-transform: uppercase;}
+.script {font-size: 3em; padding: 0.5em; width: auto; text-align: left;}
+.game .serie:first-letter, .game .title:first-letter , .game .edition:first-letter  {font-size: 1.3em; line-height: 1em;}
+.serie, .title, .edition {display: block;}
+.serie{font-size: 1.8em;}
+.game .title {color: white;}
+.edition {font-size: 1.1em;}
+.version {position: absolute; top: 0; right: 0; color: white; font-size: 0.7em; font-weight: bold;}
+
+.nav {color: white; font-weight: bold; font-size: 0.8em;}
+.nav label {padding: 0.5em; border: 1px solid grey; width: 25%; background: #770000;}
+.nav label.selected, .nav label:hover {background: #AA0000;}
+.nav label:last-child {margin-left: 25%;}
+
+.icon {text-align: center; margin: 0.5em; width: 4em; vertical-align: top; display: inline-block;}
+.icon img {width: 100%;}
+.icon span {display: block; font-size: 0.75em; font-weight: bold;}
+.small_icon {margin: 0.1em;}
+.small_icon img {width: 2em; margin-right: 0.5em;}
+
+#character input:checked + label img { border-color: lightgreen; }
+#character input:checked + label span { color: gold; }
+
+#bonus .col > div {width: 18em; display: inline-block; vertical-align: top;}
+.range {display: inline-block; width: 12em; vertical-align: top; padding: 0.5em;}
+.range span {display: block;}
+
+.tooltip {display: inline-block; vertical-align: top; height: 4em; border: 2px solid black; width: 12em; text-align: center; background: #111; color: #EEE; position: relative; border-radius: 0 4px 4px 0;}
+.spell_name {font-weight: bold; font-size: 1.2em; line-height: 3.3em;}
+.spell_type, .spell_level, .spell_attribute {font-size: 0.75em;}
+.spell_type {position: absolute; top: 0.2em; left: 0.2em;}
+.spell_level {position: absolute; top: 0.2em; right: 0.2em;}
+.spell_attribute {position: absolute; bottom: 0.2em; left: 0.2em; display: block; width: 100%; font-style: italic; text-align: center;}
+
+#skill label {margin: 0.5em;}
+#skill .col:last-child img {border-radius: 4px 0 0 4px; border-right: 0;}
+#skill .tooltip {border-left: 0;}
+#skill input:checked + label img, #skill input:checked + label .tooltip {border-color: green;}
+#skill input:checked + label .tooltip {color: lightgreen;}
+
+#attribute li, #ability li, #talent li  {
+    display: block;
+    box-sizing: border-box;
+    border-bottom: 1px dotted grey;
+    width: 18em;
+    position: relative;
+    padding-left: 2em;
+}
+#attribute li img, #ability li  img, #talent li img {margin-right: 1em; width: 2em;}
+/*.remove {position: absolute; top: 0; right: 0; background: salmon; color : white; width: 2em; height: 100%; text-align: center; line-height: 2;}*/
+.button {width: 16em; border-bottom: 1px dotted grey;}
+.button:before {display: inline-block; height: 1em; width: 1em; content: '+'; color: green; font-size: 2em; text-align: center; border: green 1px solid; line-height: 1; border-radius: 4px;}
+.remove, .move_up, .move_down {position: absolute; width: 2em; text-align: center; cursor: pointer;}
+.remove {right: 0; top: 0; background: salmon; color : white; height: 100%; line-height: 2;}
+.move_up {left: 0; top: 0; height: 50%;}
+.move_down {left: 0; bottom: 0; height: 50%;}
+.add, .duplicate {cursor: cell;}
+.lock {position: absolute; width: 2em; text-align: center; left: 0; top: 0; line-height: 2;}
+
+li:first-child .move_up, li:last-child .move_down {display: none;}
+
+#attribute li img + span:after, #ability li  img + span:after {content: " (" attr(data-rank) ")";}
+
+#result img {width: 2em; margin-right: 0.5em;}
+
+#result .col .col {width: 20em;}
+#result .bonus .col {background: #fee;}
+#result .attribute .col  {background: #eee;}
+#result .ability .col {background: #ffe;}
+#result .talent .col {background: #eef;}
+#result .skill .col {background: #efe;}
+#result .level em {font-weight: bold;}
+
+@media screen and (min-width:40em) {
+    .nav label {width: 12.5%;}
+    .nav label:last-child {margin-left: 12.5%;}
+    #attribute .col, #ability .col, #talent .col {width: 50%;}
+}
